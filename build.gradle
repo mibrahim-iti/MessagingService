@@ -1,0 +1,49 @@
+//allprojects {
+//    apply plugin: 'java'
+//}
+buildscript {
+    ext {
+    	slf4j_version = '1.7.30'
+    	
+    	jupiter_version = '5.6.2'
+    	
+    	springboot_version = '2.3.0.RELEASE'
+        spring_dependency_management_version = '1.0.9.RELEASE'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+  apply plugin: 'java'
+  apply plugin: 'eclipse'
+  
+  sourceCompatibility = JavaVersion.VERSION_11
+
+  repositories {
+    mavenCentral()
+  }
+  
+  dependencies {
+    implementation "org.slf4j:slf4j-api:${slf4j_version}"
+  }
+}
+
+group = 'com.mibrahim'
+version = '0.0.1-SNAPSHOT'
+
+project(':SpringJMS'){
+    dependencies {
+        implementation "org.junit.jupiter:junit-jupiter-api:${jupiter_version}"
+        
+        testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${jupiter_version}"
+    	testImplementation "org.junit.jupiter:junit-jupiter:${jupiter_version}"
+    }
+    test {
+		useJUnitPlatform()
+    }
+}
+
+
